@@ -8,41 +8,29 @@
 
 /* A solid wooden case: the rear edge sits above and to the right of the face. */
 .television {
-  --case-depth: 24px;
+  --case-depth: 12px;
   width: min(890px, calc(100% - var(--case-depth)));
   margin-top: var(--case-depth);
   margin-right: var(--case-depth);
 }
-.cabinet::before,
-.cabinet::after {
+/* One rounded rear shell keeps the upper and side contours continuous. */
+.cabinet::before {
   content: "";
   position: absolute;
   pointer-events: none;
   z-index: -1;
+  inset: calc(-1 * var(--case-depth)) calc(-.6 * var(--case-depth)) 3px 4px;
+  border-radius: 20px 20px 14px 14px;
+  background: linear-gradient(180deg, #b28b5744, transparent 18px),
+    linear-gradient(90deg, #21160f22, transparent 70%, #100c0899),
+    url('./wood.svg'), #573b27;
+  box-shadow: inset 0 1px 1px #dfbb7c55, inset -2px 0 4px #110d0999,
+    5px 12px 20px #0006;
 }
-.cabinet::before {
-  left: 0;
-  right: calc(-1 * var(--case-depth));
-  top: calc(-1 * var(--case-depth));
-  height: calc(var(--case-depth) + 18px);
-  border-radius: 15px 12px 0 0;
-  clip-path: polygon(var(--case-depth) 0, 100% 0, calc(100% - var(--case-depth)) 100%, 0 100%, 0 var(--case-depth));
-  background: linear-gradient(180deg, #c19a6255, #1b100b55), url('./wood.svg'), #785335;
-  box-shadow: inset 0 1px 1px #e7c68e99;
-}
-.cabinet::after {
-  top: calc(-1 * var(--case-depth));
-  bottom: 0;
-  right: calc(-1 * var(--case-depth));
-  width: calc(var(--case-depth) + 16px);
-  border-radius: 0 12px 12px 0;
-  clip-path: polygon(100% 0, 100% calc(100% - var(--case-depth)), 0 100%, 0 var(--case-depth));
-  background: linear-gradient(90deg, #100b07aa, #100b0733 60%, #080605bb), url('./wood.svg'), #382417;
-  box-shadow: inset -2px 0 2px #b9915633;
-}
+.cabinet::after {content: none;}
 .cabinet {
   border-color: #af8050 #412b1b #251810 #8c603b;
-  box-shadow: inset 0 3px 2px #ebc18a99, inset 3px 0 5px #d49a5844,
+  box-shadow: inset 0 2px 3px #ebc18a66, inset 2px 0 5px #d49a5833,
     inset -5px -7px 5px #160e0acc, 0 3px 0 #5d3d25, 0 8px 0 #281a11,
     0 10px 0 #0d0b09, 12px 24px 28px #0009, 22px 40px 55px #0006;
 }
@@ -51,9 +39,9 @@
     inset -1px -2px 2px #95826a44;
 }
 .display-frame {
-  background: linear-gradient(135deg, #ded1af, #8e8874 15%, #595c4e 38%, #30372e 70%, #a59b80);
+  background: linear-gradient(135deg, #b9b097, #817d6b 18%, #55594c 45%, #343b31 75%, #7d7b65);
   box-shadow: 0 0 0 2px #0f1110, 2px 4px 0 #1c211a, 4px 8px 8px #000a,
-    inset 2px 3px 2px #f6e7bfaa, inset -3px -4px 3px #141a13aa;
+    inset 1px 2px 2px #f6e7bf66, inset -2px -3px 3px #141a1388;
 }
 .screen {
   border-color: #080d09 #1b231a #414638 #121910;
@@ -66,9 +54,12 @@
     inset 0 -2px 2px #d7e8c722;
 }
 .glass::before {
-  top: 3%; left: 5%; width: 72%; height: 22%;
-  border-top-color: #f4ffe42b;
-  background: linear-gradient(175deg, #f1ffe809, transparent 50%);
+  top: 1%; left: 5%; width: 66%; height: 30%;
+  border: 0;
+  border-radius: 50%;
+  transform: rotate(-8deg);
+  background: radial-gradient(ellipse at 35% 10%, #edf8e810, transparent 70%);
+  filter: blur(5px);
 }
 .dial {
   box-shadow: 0 0 0 2px #9c917680, 2px 3px 0 #23251d, 4px 6px 0 #11150f,
@@ -87,7 +78,8 @@
 .power:active {box-shadow: inset 0 2px 4px #0007, 0 1px 0 #050705, 0 0 0 3px #0e110d;}
 .feet span {box-shadow: 3px 6px 5px #0009;}
 @media(max-width:600px) {
-  .television {--case-depth: 10px;}
+  .television {--case-depth: 7px;}
   .cabinet {padding-left: 9px; padding-right: 9px;}
   .display-frame {box-shadow: 0 0 0 2px #0f1110, 2px 4px 4px #000a, inset 2px 3px 2px #f6e7bf99, inset -2px -3px 2px #141a13aa;}
 }
+
