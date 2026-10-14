@@ -4,3 +4,4 @@
 /* Keep the decorative floor shadow inside the page at intermediate widths. */
 .television::before{left:0;right:0}
 @media(max-width:600px){.recipient{font-size:clamp(16px,5.3cqw,29px)}.greeting{font-size:clamp(15px,5.6cqw,30px)}.wish{font-size:clamp(13px,4.4cqw,24px)}}
+.program{line-height:1.3}
