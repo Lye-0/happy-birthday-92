@@ -116,14 +116,14 @@
     background-clip: text;
     -webkit-background-clip: text;
     text-shadow: none;
-    animation: number-sheen 1.1s linear .5s both;
+    animation: number-sheen 2.2s linear .5s both;
   }
 }
 @keyframes number-sheen {
   from {background-position: 100% 50%;}
   to {background-position: 0% 50%;}
 }
-/* Each star has a long quiet interval; changing playing to on preserves its clock. */
+/* Each 3.6s cycle keeps a gentle 2s shimmer and a 1.6s rest. */
 .sparkles > * {display:inline-block;transform-origin:center;}
 :is([data-state=playing], [data-state=on]) .sparkles > * {
   animation:star-shimmer 3.6s ease-in-out infinite both;
@@ -133,8 +133,8 @@
 :is([data-state=playing], [data-state=on]) .sparkles > i {animation-delay:2.15s;}
 :is([data-state=playing], [data-state=on]) .sparkles > b {animation-delay:3.05s;}
 @keyframes star-shimmer {
-  0%, 25%, 100% {transform:scale(1);color:#cba567;text-shadow:0 0 0 #efc77800;}
-  12.5% {transform:scale(1.18);color:#fff0c1;text-shadow:0 0 9px #efc77888;}
+  0%, 55.5556%, 100% {transform:scale(1);color:#cba567;text-shadow:0 0 0 #efc77800;}
+  27.7778% {transform:scale(1.18);color:#fff0c1;text-shadow:0 0 9px #efc77888;}
 }
 /* Vertical travel and the paper's flutter have independent, continuous motion. */
 .confetti {position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2;container-type:size;}
@@ -168,3 +168,4 @@
   [data-state=playing] .celebration strong {color:#f5d48c;background:none;}
   .confetti {display:none;}
 }
+
