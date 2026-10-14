@@ -1,31 +1,7 @@
-# おじいちゃんへ — 92歳の特別放送
+# HAPPY BIRTHDAY 82
 
-木目のテレビの電源を入れると、92歳を祝う番組が始まる静的サイトです。HTML / CSS / JavaScriptのみ。外部通信・外部フォント・依存パッケージはありません。
+82 WISHES
 
-## 見る
+## DEPLOYMENT
 
-`index.html` をブラウザで開くか、このディレクトリで `python -m http.server 8092` を実行し、http://localhost:8092 を開きます。
-
-- 電源：起動 / 電源OFF。起動途中でも操作できます。
-- もう一度見る：番組終了後に再生できます。
-- 音あり / 消音中：クリック音を切り替えます。初回操作前には音を再生しません。
-- OSの「視差効果を減らす」等の設定では、起動ノイズと段階的な表示を省略します。
-
-## GitHub Pages
-
-ファイルをリポジトリのルートへpushし、Settings → Pages → Deploy from a branch → main / (root) を選択してください。ビルドは不要です。相対パスなのでサブディレクトリ配信にも対応しています。
-
-## 構成
-
-- `index.html`：メッセージとテレビの構造
-- `style.css`：木製筐体、画面、レスポンシブ、演出
-- `script.js`：off → starting → playing → on、stopping → offの状態管理。状態変更時に予約処理を解除
-- `wood.svg` / `grain.svg`：ローカルの素材感
-- `favicon.svg`：テレビのアイコン
-
-PCでは右側、900px以下では下側に操作部を配置。画面はどちらも4:3です。音声はWeb Audio APIによる45msの控えめなクリック音です。
-
-## 検証
-
-Chromeの実ブラウザで、電源ON/OFF、再生、起動途中の7連打、消音表示、Enterキー操作、動きを減らす設定を確認。320〜1280px幅で4:3画面とメッセージの収まりを確認しています。実機スマートフォン、Safari / Firefox、およびスピーカーでの音量の聴感確認は未実施です。
-
+https://lye-0.github.io/happy-birthday-92/
