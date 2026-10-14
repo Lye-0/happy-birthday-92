@@ -106,56 +106,65 @@
   .volume .small {width: 31px; height: 31px; margin-top: 12px; margin-bottom: 4px;}
 }
 
-/* A single soft highlight crosses the number once the message has appeared. */
+/* The number stays gold while a soft, brighter band passes over it once. */
 @supports ((background-clip: text) or (-webkit-background-clip: text)) {
   [data-state=playing] .celebration strong {
     color: transparent;
-    background-image: linear-gradient(110deg, #f5d48c 38%, #ffe8b5 46%, #fff5d8 50%, #ffe8b5 54%, #f5d48c 62%);
-    background-size: 300% 100%;
+    background-image: linear-gradient(110deg, #f5d48c 38%, #ffe7aa 44%, #fff9e8 50%, #ffe7aa 56%, #f5d48c 62%);
+    background-size: 250% 100%;
     background-repeat: no-repeat;
     background-clip: text;
     -webkit-background-clip: text;
-    animation: number-sheen 1.8s ease-in-out 2.6s both;
+    text-shadow: none;
+    animation: number-sheen 2.2s linear 1s both;
   }
 }
 @keyframes number-sheen {
   from {background-position: 100% 50%;}
   to {background-position: 0% 50%;}
 }
-.sparkles > * {display: inline-block; transform-origin: center;}
+/* Each star has a long quiet interval; changing playing to on preserves its clock. */
+.sparkles > * {display:inline-block;transform-origin:center;}
 :is([data-state=playing], [data-state=on]) .sparkles > * {
-  animation: star-shimmer 6s ease-in-out infinite both;
+  animation:star-shimmer 8s ease-in-out infinite both;
 }
-:is([data-state=playing], [data-state=on]) .sparkles > span {animation-delay: 4s;}
-:is([data-state=playing], [data-state=on]) .sparkles > em {animation-delay: 4.45s;}
-:is([data-state=playing], [data-state=on]) .sparkles > i {animation-delay: 4.9s;}
-:is([data-state=playing], [data-state=on]) .sparkles > b {animation-delay: 5.35s;}
+:is([data-state=playing], [data-state=on]) .sparkles > span {animation-delay:8.2s;}
+:is([data-state=playing], [data-state=on]) .sparkles > em {animation-delay:10.2s;}
+:is([data-state=playing], [data-state=on]) .sparkles > i {animation-delay:12.2s;}
+:is([data-state=playing], [data-state=on]) .sparkles > b {animation-delay:14.2s;}
 @keyframes star-shimmer {
-  0%, 25%, 100% {transform: scale(1); color: #cba567; text-shadow: none;}
-  12.5% {transform: scale(1.22); color: #ffe8b0; text-shadow: 0 0 9px #efc77866;}
+  0%, 25%, 100% {transform:scale(1);color:#cba567;text-shadow:0 0 0 #efc77800;}
+  12.5% {transform:scale(1.12);color:#ffe3a3;text-shadow:0 0 7px #efc77855;}
 }
-@media(prefers-reduced-motion:reduce) {
-  [data-state=playing] .celebration strong {color: #f5d48c; background: none;}
-}
-
-/* One gentle shower along the sides leaves the central message clear. */
-.confetti {position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2;}
+/* Vertical travel and the paper's flutter have independent, continuous motion. */
+.confetti {position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2;container-type:size;}
 .confetti > span {
-  position:absolute;left:var(--x);top:-8%;width:5px;height:9px;
-  border-radius:1px;background:#d8b66f;opacity:0;
+  position:absolute;left:var(--x);top:-14px;width:clamp(3px, .8cqw, 5px);
+  height:clamp(6px, 1.5cqw, 9px);opacity:0;
 }
-.confetti > span:nth-child(3n) {background:#f4e2b5;width:4px;height:7px;}
-.confetti > span:nth-child(4n) {background:#b99351;height:5px;}
+.confetti i {
+  display:block;width:100%;height:100%;border-radius:1px;
+  background:linear-gradient(120deg,#e8cb89,#b79553);
+}
+.confetti > span:nth-child(3n) i {background:#eddeb9;}
+.confetti > span:nth-child(4n) {height:clamp(4px, 1cqw, 6px);}
 [data-state=playing] .confetti > span {
   animation:confetti-fall var(--fall) linear var(--delay) both;
 }
+[data-state=playing] .confetti i {
+  animation:paper-flutter var(--flutter) ease-in-out var(--delay) infinite both;
+}
 @keyframes confetti-fall {
-  0% {top:-8%;opacity:0;transform:translateX(0) rotate(0deg);}
-  12% {opacity:.75;}
-  45% {transform:translateX(var(--drift)) rotate(calc(var(--turn) * .45));}
-  80% {opacity:.65;}
-  100% {top:105%;opacity:0;transform:translateX(0) rotate(var(--turn));}
+  0% {opacity:0;transform:translate3d(0,0,0);}
+  10% {opacity:.8;}
+  85% {opacity:.8;}
+  100% {opacity:0;transform:translate3d(var(--drift),calc(100cqh + 30px),0);}
+}
+@keyframes paper-flutter {
+  0%,100% {transform:translateX(-3px) rotate(var(--tilt)) scaleX(.75);}
+  50% {transform:translateX(3px) rotate(calc(var(--tilt) * -1)) scaleX(1);}
 }
 @media(prefers-reduced-motion:reduce) {
+  [data-state=playing] .celebration strong {color:#f5d48c;background:none;}
   .confetti {display:none;}
 }
