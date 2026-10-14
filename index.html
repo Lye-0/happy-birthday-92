@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#191612">
+  <meta name="description" content="テレビの電源を入れると始まる、おじいちゃんの92歳を祝う特別放送。">
+  <title>おじいちゃんへ — 92歳の特別放送</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="intro">
+      <p class="eyebrow">A SPECIAL DAY, A SPECIAL PROGRAM.</p>
+      <h1>今日は、あなたが主役。</h1>
+      <p class="dedication">おじいちゃんへ、家族みんなから。</p>
+    </header>
+    <section class="television" data-state="off" aria-label="92歳のお祝いテレビ">
+      <div class="cabinet">
+        <div class="fascia">
+          <div class="display-frame">
+            <div class="screen" id="screen">
+              <div class="program" aria-hidden="true">
+                <div class="broadcast-label">本日の特別放送</div>
+                <div class="celebration"><span class="congratulation">祝</span><strong>92</strong><span class="age">歳</span></div>
+                <div class="recipient">おじいちゃん</div>
+                <div class="greeting">お誕生日おめでとう！</div>
+                <div class="wish">これからも元気でいてね！</div>
+                <div class="english"><span>✦</span> HAPPY BIRTHDAY <span>✦</span></div>
+                <div class="sparkles" aria-hidden="true">✦<i>✧</i><b>✦</b><em>✧</em></div>
+              </div>
+              <canvas class="static" width="240" height="180" aria-hidden="true"></canvas>
+              <div class="ignition" aria-hidden="true"></div>
+              <div class="glass" aria-hidden="true"></div>
+            </div>
+            <div class="screen-bottom" aria-hidden="true"><span class="brand">おもいで<span>テレビ</span></span><span class="model">COLOR · 92</span></div>
+          </div>
+          <div class="controls">
+            <div class="tuning" aria-hidden="true">
+              <span class="hardware-label">CHANNEL</span>
+              <div class="dial-scale"><span>1 · 3 · 5 · 7 · 9 · 11</span><div class="dial channel"><div></div></div></div>
+            </div>
+            <div class="volume" aria-hidden="true"><span class="hardware-label">VOLUME</span><div class="dial small"><div></div></div></div>
+            <div class="speaker" aria-hidden="true"></div>
+            <div class="power-group">
+              <div class="power-label"><span class="lamp" aria-hidden="true"></span><span>電源</span></div>
+              <button class="power" type="button" aria-label="テレビの電源を入れる" aria-pressed="false" aria-controls="screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v9M7 5.7a8 8 0 1 0 10 0"/></svg><span>入 / 切</span></button>
+            </div>
+          </div>
+        </div>
+        <span class="screw screw-left" aria-hidden="true"></span><span class="screw screw-right" aria-hidden="true"></span>
+      </div>
+      <div class="feet" aria-hidden="true"><span></span><span></span></div>
+    </section>
+    <div class="instructions">
+      <p id="status" role="status" aria-live="polite">電源を入れてください<span>小さな特別番組が、はじまります。</span></p>
+      <div class="actions"><button id="replay" type="button" disabled>↻ <span>もう一度見る</span></button><button id="mute" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4 5 9H2v6h3l6 5zM15 8q5 4 0 8M18 5q8 7 0 14"/></svg><span>音あり</span></button></div>
+    </div>
+    <footer>92年分のありがとうを、こめて。</footer>
+    <noscript><p class="no-script">おじいちゃん、92歳のお誕生日おめでとう！ これからも元気でいてね！<br>テレビの演出を見るにはJavaScriptを有効にしてください。</p></noscript>
+  </main>
+</body>
+</html>
