@@ -106,3 +106,34 @@
   .volume .small {width: 31px; height: 31px; margin-top: 12px; margin-bottom: 4px;}
 }
 
+/* A single soft highlight crosses the number once the message has appeared. */
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  [data-state=playing] .celebration strong {
+    color: transparent;
+    background-image: linear-gradient(110deg, #f5d48c 38%, #ffe8b5 46%, #fff5d8 50%, #ffe8b5 54%, #f5d48c 62%);
+    background-size: 300% 100%;
+    background-repeat: no-repeat;
+    background-clip: text;
+    -webkit-background-clip: text;
+    animation: number-sheen 1.8s ease-in-out 2.6s both;
+  }
+}
+@keyframes number-sheen {
+  from {background-position: 100% 50%;}
+  to {background-position: 0% 50%;}
+}
+.sparkles > * {display: inline-block; transform-origin: center;}
+[data-state=playing] .sparkles > * {
+  animation: star-shimmer 1.5s ease-in-out both;
+}
+[data-state=playing] .sparkles > span {animation-delay: 4s;}
+[data-state=playing] .sparkles > em {animation-delay: 4.45s;}
+[data-state=playing] .sparkles > i {animation-delay: 4.9s;}
+[data-state=playing] .sparkles > b {animation-delay: 5.35s;}
+@keyframes star-shimmer {
+  0%, 100% {transform: scale(1); color: #cba567; text-shadow: none;}
+  50% {transform: scale(1.22); color: #ffe8b0; text-shadow: 0 0 9px #efc77866;}
+}
+@media(prefers-reduced-motion:reduce) {
+  [data-state=playing] .celebration strong {color: #f5d48c; background: none;}
+}

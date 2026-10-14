@@ -84,7 +84,8 @@ function showProgram() {
   setState('playing');
   announce('おじいちゃんの、特別放送。', '家族みんなの気持ちを、こめて。');
   if (motion.matches) finish();
-  else later(finish, 2900);
+  // Allow the one-shot number sheen and staggered stars to settle before resting.
+  else later(finish, 7000);
 }
 function start() {
   cancelSequence();
@@ -118,3 +119,4 @@ motion.addEventListener('change', () => {
   if (['starting', 'playing'].includes(state)) finish();
   else if (state === 'stopping') { cancelSequence(); setState('off'); }
 });
+
