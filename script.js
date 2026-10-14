@@ -17,16 +17,16 @@ let master;
 
 // A fixed, small set of decorative pieces is reused on every playback.
 const confetti = document.querySelector('.confetti');
-for (let i = 0; i < 18; i++) {
+for (let i = 0; i < 54; i++) {
   const piece = document.createElement('span');
   const flake = document.createElement('i');
   const side = i % 2;
   // Distribute entry times independently of location to avoid falling rows.
-  piece.style.setProperty('--x', `${side ? 84 + (i * 11 % 12) : 4 + (i * 11 % 12)}%`);
+  piece.style.setProperty('--x', `${i % 4 === 0 ? 24 + (i * 13 % 52) : side ? 72 + (i * 11 % 24) : 4 + (i * 11 % 24)}%`);
   piece.style.setProperty('--drift', `${(side ? -1 : 1) * (4 + i % 4 * 2)}px`);
-  piece.style.setProperty('--delay', `${3.1 + (i * 7 % 18) * .115}s`);
-  piece.style.setProperty('--fall', `${4.8 + (i * 5 % 7) * .19}s`);
-  piece.style.setProperty('--flutter', `${1.7 + i % 5 * .21}s`);
+  piece.style.setProperty('--delay', `${.45 + (i * 17 % 54) * .023}s`);
+  piece.style.setProperty('--fall', `${3.6 + (i * 5 % 9) * .14}s`);
+  piece.style.setProperty('--flutter', `${1.2 + i % 5 * .16}s`);
   piece.style.setProperty('--tilt', `${i % 2 ? -24 : 24}deg`);
   piece.append(flake);
   confetti.append(piece);
@@ -102,7 +102,7 @@ function showProgram() {
   announce('おじいちゃんの、特別放送。', '家族みんなの気持ちを、こめて。');
   if (motion.matches) finish();
   // Let the one-shot confetti finish; the stars continue in the on state.
-  else later(finish, 11200);
+  else later(finish, 6800);
 }
 function start() {
   cancelSequence();
