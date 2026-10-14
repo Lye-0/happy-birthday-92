@@ -123,17 +123,39 @@
   to {background-position: 0% 50%;}
 }
 .sparkles > * {display: inline-block; transform-origin: center;}
-[data-state=playing] .sparkles > * {
-  animation: star-shimmer 1.5s ease-in-out both;
+:is([data-state=playing], [data-state=on]) .sparkles > * {
+  animation: star-shimmer 6s ease-in-out infinite both;
 }
-[data-state=playing] .sparkles > span {animation-delay: 4s;}
-[data-state=playing] .sparkles > em {animation-delay: 4.45s;}
-[data-state=playing] .sparkles > i {animation-delay: 4.9s;}
-[data-state=playing] .sparkles > b {animation-delay: 5.35s;}
+:is([data-state=playing], [data-state=on]) .sparkles > span {animation-delay: 4s;}
+:is([data-state=playing], [data-state=on]) .sparkles > em {animation-delay: 4.45s;}
+:is([data-state=playing], [data-state=on]) .sparkles > i {animation-delay: 4.9s;}
+:is([data-state=playing], [data-state=on]) .sparkles > b {animation-delay: 5.35s;}
 @keyframes star-shimmer {
-  0%, 100% {transform: scale(1); color: #cba567; text-shadow: none;}
-  50% {transform: scale(1.22); color: #ffe8b0; text-shadow: 0 0 9px #efc77866;}
+  0%, 25%, 100% {transform: scale(1); color: #cba567; text-shadow: none;}
+  12.5% {transform: scale(1.22); color: #ffe8b0; text-shadow: 0 0 9px #efc77866;}
 }
 @media(prefers-reduced-motion:reduce) {
   [data-state=playing] .celebration strong {color: #f5d48c; background: none;}
+}
+
+/* One gentle shower along the sides leaves the central message clear. */
+.confetti {position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2;}
+.confetti > span {
+  position:absolute;left:var(--x);top:-8%;width:5px;height:9px;
+  border-radius:1px;background:#d8b66f;opacity:0;
+}
+.confetti > span:nth-child(3n) {background:#f4e2b5;width:4px;height:7px;}
+.confetti > span:nth-child(4n) {background:#b99351;height:5px;}
+[data-state=playing] .confetti > span {
+  animation:confetti-fall var(--fall) linear var(--delay) both;
+}
+@keyframes confetti-fall {
+  0% {top:-8%;opacity:0;transform:translateX(0) rotate(0deg);}
+  12% {opacity:.75;}
+  45% {transform:translateX(var(--drift)) rotate(calc(var(--turn) * .45));}
+  80% {opacity:.65;}
+  100% {top:105%;opacity:0;transform:translateX(0) rotate(var(--turn));}
+}
+@media(prefers-reduced-motion:reduce) {
+  .confetti {display:none;}
 }

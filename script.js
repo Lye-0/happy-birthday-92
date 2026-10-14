@@ -15,6 +15,19 @@ let noiseFrame = 0;
 let audio;
 let master;
 
+// A fixed, small set of decorative pieces is reused on every playback.
+const confetti = document.querySelector('.confetti');
+for (let i = 0; i < 20; i++) {
+  const piece = document.createElement('span');
+  const side = i % 2;
+  piece.style.setProperty('--x', `${side ? 82 + (i * 7 % 15) : 3 + (i * 7 % 15)}%`);
+  piece.style.setProperty('--drift', `${(side ? -1 : 1) * (6 + i % 5 * 3)}px`);
+  piece.style.setProperty('--delay', `${2.8 + i % 7 * .16}s`);
+  piece.style.setProperty('--fall', `${4.2 + i % 4 * .3}s`);
+  piece.style.setProperty('--turn', `${(side ? -1 : 1) * (150 + i * 19)}deg`);
+  confetti.append(piece);
+}
+
 function cancelSequence() {
   timers.forEach(clearTimeout);
   timers = [];
@@ -84,8 +97,8 @@ function showProgram() {
   setState('playing');
   announce('おじいちゃんの、特別放送。', '家族みんなの気持ちを、こめて。');
   if (motion.matches) finish();
-  // Allow the one-shot number sheen and staggered stars to settle before resting.
-  else later(finish, 7000);
+  // Let the one-shot confetti finish; the stars continue in the on state.
+  else later(finish, 9000);
 }
 function start() {
   cancelSequence();
@@ -119,4 +132,5 @@ motion.addEventListener('change', () => {
   if (['starting', 'playing'].includes(state)) finish();
   else if (state === 'stopping') { cancelSequence(); setState('off'); }
 });
+
 
