@@ -15,19 +15,28 @@ let noiseFrame = 0;
 let audio;
 let master;
 
-// A fixed, small set of decorative pieces is reused on every playback.
+// Reuse the same 90 pieces on replay. Independent seeded samples avoid rows
+// and repeated columns while keeping the composition reproducible.
 const confetti = document.querySelector('.confetti');
-for (let i = 0; i < 54; i++) {
+let confettiSeed = 92;
+function confettiSample() {
+  confettiSeed = (Math.imul(confettiSeed, 1664525) + 1013904223) >>> 0;
+  return confettiSeed / 4294967296;
+}
+for (let i = 0; i < 90; i++) {
   const piece = document.createElement('span');
   const flake = document.createElement('i');
   const side = i % 2;
-  // Distribute entry times independently of location to avoid falling rows.
-  piece.style.setProperty('--x', `${i % 4 === 0 ? 24 + (i * 13 % 52) : side ? 72 + (i * 11 % 24) : 4 + (i * 11 % 24)}%`);
-  piece.style.setProperty('--drift', `${(side ? -1 : 1) * (4 + i % 4 * 2)}px`);
-  piece.style.setProperty('--delay', `${.45 + (i * 17 % 54) * .023}s`);
-  piece.style.setProperty('--fall', `${3.6 + (i * 5 % 9) * .14}s`);
-  piece.style.setProperty('--flutter', `${1.2 + i % 5 * .16}s`);
-  piece.style.setProperty('--tilt', `${i % 2 ? -24 : 24}deg`);
+  const central = confettiSample() < .18;
+  const x = central ? 30 + confettiSample() * 40
+    : side ? 72 + confettiSample() * 23 : 5 + confettiSample() * 23;
+  piece.style.setProperty('--x', `${x}%`);
+  piece.style.setProperty('--drift', `${(confettiSample() - .5) * 18}px`);
+  piece.style.setProperty('--delay', `${.45 + i / 90 * 1.35 + confettiSample() * .04}s`);
+  piece.style.setProperty('--fall', `${3.6 + confettiSample() * 1.2}s`);
+  piece.style.setProperty('--flutter', `${1.2 + confettiSample() * .8}s`);
+  piece.style.setProperty('--phase', `${-confettiSample() * 1.2}s`);
+  piece.style.setProperty('--tilt', `${(side ? -1 : 1) * (15 + confettiSample() * 25)}deg`);
   piece.append(flake);
   confetti.append(piece);
 }

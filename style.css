@@ -152,7 +152,7 @@
   animation:confetti-fall var(--fall) linear var(--delay) both;
 }
 [data-state=playing] .confetti i {
-  animation:paper-flutter var(--flutter) ease-in-out var(--delay) infinite both;
+  animation:paper-flutter var(--flutter) ease-in-out calc(var(--delay) + var(--phase)) infinite both;
 }
 @keyframes confetti-fall {
   0% {opacity:0;transform:translate3d(0,0,0);}
@@ -168,4 +168,3 @@
   [data-state=playing] .celebration strong {color:#f5d48c;background:none;}
   .confetti {display:none;}
 }
-
